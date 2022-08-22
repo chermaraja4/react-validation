@@ -35,7 +35,7 @@ export default function RegisterForm(){
             }
             return {...state,[action.input]:invalidText ?"":action.value, error_email:invalidText} 
           }
-          case "mobile":{  
+          case "mobile":{                 
            let  invalidText=""
            if( /^[\s()+-]*([0-9][\s()+-.]*){0,18}$/.test(action.value) ){ 
              return {...state,[action.input]:action.value.length>10 ?"":action.value, error_mobile:invalidText}                 
@@ -52,7 +52,7 @@ export default function RegisterForm(){
             if(!action.value.match(letters)){   
                    invalidText=`invalid ${action.input} `                  
             }
-            return {...state,[action.input]:invalidText && !action.input=== "message"?"":action.value,["error_"+action.input]:invalidText} 
+            return {...state,[action.input]:invalidText ? "":action.value,["error_"+action.input]:invalidText} 
           }
         default:
             return state;
@@ -74,13 +74,14 @@ export default function RegisterForm(){
  }
 
  
- const SubmitData=()=>{    
-        alert("successfully")  
+ const SubmitData=()=>{
+        alert("successfully") 
+  
  }
 
  useEffect(()=>{
   
-    if(state.name && state.email ){
+    if(state.name && state.email &&  state.mobile && state.country && state.city && state.state && state.message){
         setDisableButton(false)
     }else{
         setDisableButton(true)
@@ -161,7 +162,8 @@ export default function RegisterForm(){
         <Button variant="primary"  onClick={SubmitData} disabled={diasbleButton}>
           Submit
         </Button>
-     </div>       
- </div>
+     </div>
+       
+        </div>
     )
 } 
